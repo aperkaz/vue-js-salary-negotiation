@@ -2,8 +2,10 @@
   <div class="wrapper">
     <form @submit.prevent="submitValues">
       <input
+        :id="placeholder"
         v-show="!submitted"
         type="number"
+        name="value"
         :placeholder="placeholder"
         v-model="value"
       />
