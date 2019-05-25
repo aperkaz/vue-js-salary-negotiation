@@ -1,5 +1,7 @@
 # vue-js-salary-negotiation
 
+App for salary negotiations between employer and employee.
+
 ## Project setup
 ```
 npm install
@@ -34,6 +36,3 @@ npm run test:e2e
 ```
 npm run test:unit
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
