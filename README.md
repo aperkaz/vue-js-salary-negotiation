@@ -1,6 +1,6 @@
 # vue-js-salary-negotiation
 
-App for salary negotiations between employer and employee.
+App for salary negotiations between employer and employee. Unit and e2e tests included.
 
 ## Project setup
 ```
@@ -17,14 +17,14 @@ npm run serve
 npm run build
 ```
 
-### Run your tests
-```
-npm run test
-```
-
 ### Lints and fixes files
 ```
 npm run lint
+```
+
+### Run your tests
+```
+npm run test
 ```
 
 ### Run your end-to-end tests
