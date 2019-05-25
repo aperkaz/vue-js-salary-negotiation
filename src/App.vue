@@ -1,17 +1,20 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <h1>
+      Vue.js salary negotatior
+    </h1>
+    <div><span>Employer tab</span> / <span>Employee tab</span></div>
+    <SalaryExpectationPanel placeholder="Employer" />
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import SalaryExpectationPanel from "./components/SalaryExpectationPanel.vue";
 
 export default {
   name: "app",
   components: {
-    HelloWorld
+    SalaryExpectationPanel
   }
 };
 </script>
