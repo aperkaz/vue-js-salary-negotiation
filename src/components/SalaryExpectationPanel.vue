@@ -1,23 +1,21 @@
 <template>
   <div class="wrapper">
-    <input
-      v-show="!submitted"
-      type="number"
-      :placeholder="placeholder"
-      v-model="value"
-    />
-    <button v-show="!submitted" v-on:click.prevent="submitValues">
-      Submit
-    </button>
-    <p v-show="submitted">{{ submittedMessage }}</p>
+    <form @submit.prevent="submitValues">
+      <input
+        v-show="!submitted"
+        type="number"
+        :placeholder="placeholder"
+        v-model="value"
+      />
+      <input v-if="!submitted" type="submit" value="Submit" />
+      <p v-else>{{ onSubmittedMessage }}</p>
+    </form>
   </div>
 </template>
 
 <script>
-import { EventBus } from "../utils/EventBus";
+import { EventBus } from "../utils/state/EventBus";
 
-// TODONOW: rename props
-// TODONOW: delete up down from input
 export default {
   name: "SalaryExpectationPanel",
   props: {
@@ -25,7 +23,7 @@ export default {
       type: String,
       required: false
     },
-    submittedMessage: {
+    onSubmittedMessage: {
       type: String,
       required: false
     },
@@ -43,7 +41,7 @@ export default {
   methods: {
     submitValues() {
       if (isNaN(this.value) || this.value === "" || this.value <= 0) {
-        console.log("Please, input a number"); // TODONOW: improve
+        this.value = "";
       } else {
         EventBus.$emit(this.submitEvent, parseInt(this.value, 10));
         this.submitted = true;

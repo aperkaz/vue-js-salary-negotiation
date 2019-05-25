@@ -4,7 +4,7 @@
       <div class="modal-wrapper">
         <div class="modal-container">
           <div class="modal-header">
-            <h2 v-if="success">Success</h2>
+            <h2 v-if="isSuccess">Success</h2>
             <h2 v-else>Failure</h2>
           </div>
 
@@ -12,13 +12,13 @@
             <div>
               <p>Maximum offer was: {{ employerOffer }}</p>
               <p>Minimum expected salary was: {{ employeeExpectation }}</p>
-              <br/>
-              <p>The temperature in London: {{temperatureLondon}}°C</p>
-               <br/>
+              <br />
+              <p>The temperature in London: {{ temperatureLondon }}°C</p>
+              <br />
             </div>
           </div>
 
-          <button @click="$emit('close')">
+          <button @click="$emit('close-modal')">
             OK
           </button>
         </div>
@@ -29,10 +29,6 @@
 
 <script>
 import axios from "axios";
-// TODONOW: refactor modal
-
-// TODONOW: clean styling
-
 // TODONOW: extract key from API call. https://github.com/motdotla/dotenv#readme. Mention it on the Docs
 export default {
   name: "ResultsModal",
@@ -45,7 +41,7 @@ export default {
       type: Number,
       required: true
     },
-    success: {
+    isSuccess: {
       type: Boolean,
       required: true
     }
@@ -102,32 +98,5 @@ export default {
 
 .modal-body {
   margin: 20px 0;
-}
-
-.modal-default-button {
-  float: right;
-}
-
-/*
- * The following styles are auto-applied to elements with
- * transition="modal" when their visibility is toggled
- * by Vue.js.
- *
- * You can easily play with the modal transition by editing
- * these styles.
- */
-
-.modal-enter {
-  opacity: 0;
-}
-
-.modal-leave-active {
-  opacity: 0;
-}
-
-.modal-enter .modal-container,
-.modal-leave-active .modal-container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
 }
 </style>

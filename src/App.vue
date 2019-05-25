@@ -6,10 +6,10 @@
     <Tabs />
     <ResultsModal
       v-if="showModal"
-      @close="hasModalBeenShown = true"
-      :success="isSuccess"
+      :isSuccess="isSuccess"
       :employerOffer="employerOffer"
       :employeeExpectation="employeeExpectation"
+      @close-modal="hasModalBeenShown = true"
     />
   </div>
 </template>
@@ -18,8 +18,8 @@
 import Tabs from "./components/Tabs.vue";
 import ResultsModal from "./components/ResultsModal.vue";
 import { doExpectationsMatch } from "./utils/calculations";
-import { events } from "./utils/events";
-import { EventBus } from "./utils/EventBus";
+import { EventBus } from "./utils/state/EventBus";
+import { events } from "./utils/state/events";
 
 export default {
   name: "app",
@@ -59,8 +59,6 @@ export default {
     );
   }
 };
-
-// TODONOW: clean up styling
 </script>
 
 <style>

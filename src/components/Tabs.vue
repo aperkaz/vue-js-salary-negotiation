@@ -14,7 +14,7 @@
     <div v-show="selectedTab === 'Employer-Tab'">
       <SalaryExpectationPanel
         placeholder="Enter maximum offer"
-        submittedMessage="Employer offer submitted!"
+        onSubmittedMessage="Employer offer submitted!"
         :submitEvent="submitEmployerOfferEvent"
       />
     </div>
@@ -22,7 +22,7 @@
     <div v-show="selectedTab === 'Employee-Tab'">
       <SalaryExpectationPanel
         placeholder="Enter minimum salary"
-        submittedMessage="Employee salary expectation submitted!"
+        onSubmittedMessage="Employee salary expectation submitted!"
         :submitEvent="submitEmployeeExpectationEvent"
       />
     </div>
@@ -31,7 +31,7 @@
 
 <script>
 import SalaryExpectationPanel from "./SalaryExpectationPanel";
-import { events } from "../utils/events";
+import { events } from "../utils/state/events";
 
 export default {
   name: "Tabs",
