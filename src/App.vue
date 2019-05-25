@@ -5,9 +5,11 @@
     </h1>
     <Tabs />
     <ResultsModal
-      v-if="resultSubmitted"
-      employerOffer="100"
-      employeeExpectation="100"
+      v-if="showModal"
+      @close="hasModalBeenShown = true"
+      :success="isSuccess"
+      :employerOffer="employerOffer"
+      :employeeExpectation="employeeExpectation"
     />
   </div>
 </template>
@@ -15,6 +17,9 @@
 <script>
 import Tabs from "./components/Tabs.vue";
 import ResultsModal from "./components/ResultsModal.vue";
+import { isExpectationMatch } from "./utils/calculations";
+import { events } from "./utils/events";
+import { EventBus } from "./utils/EventBus";
 
 export default {
   name: "app",
@@ -22,10 +27,36 @@ export default {
     Tabs,
     ResultsModal
   },
+  data() {
+    return {
+      employerOffer: null,
+      employeeExpectation: null,
+      hasModalBeenShown: false
+    };
+  },
   computed: {
-    resultSubmitted() {
-      return false;
+    showModal() {
+      return this.resultSubmitted() && !this.hasModalBeenShown;
+    },
+    isSuccess() {
+      return isExpectationMatch(this.employerOffer, this.employeeExpectation);
     }
+  },
+  methods: {
+    resultSubmitted() {
+      return this.employerOffer && this.employeeExpectation ? true : false;
+    }
+  },
+  mounted() {
+    EventBus.$on(
+      events.SUBMIT_EMPLOYER_OFFER,
+      value => (this.employerOffer = value)
+    );
+
+    EventBus.$on(
+      events.SUBMIT_EMPLOYEE_EXPECTATION,
+      value => (this.employeeExpectation = value)
+    );
   }
 };
 
@@ -35,10 +66,8 @@ export default {
 <style>
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 25vh;
 }
 </style>

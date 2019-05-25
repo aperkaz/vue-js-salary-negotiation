@@ -6,12 +6,16 @@
       :placeholder="placeholder"
       v-model="value"
     />
-    <button v-show="!submitted" v-on:click.prevent="onSubmit">Submit</button>
+    <button v-show="!submitted" v-on:click.prevent="submitValues">
+      Submit
+    </button>
     <p v-show="submitted">{{ submittedMessage }}</p>
   </div>
 </template>
 
 <script>
+import { EventBus } from "../utils/EventBus";
+
 // TODONOW: rename props
 // TODONOW: delete up down from input
 export default {
@@ -24,6 +28,10 @@ export default {
     submittedMessage: {
       type: String,
       required: false
+    },
+    submitEvent: {
+      type: String,
+      required: true
     }
   },
   data() {
@@ -33,12 +41,11 @@ export default {
     };
   },
   methods: {
-    onSubmit() {
+    submitValues() {
       if (isNaN(this.value) || this.value === "" || this.value <= 0) {
-        console.log("Please, input a number");
+        console.log("Please, input a number"); // TODONOW: improve
       } else {
-        console.log("Submit: ", this.value);
-        this.value = "";
+        EventBus.$emit(this.submitEvent, parseInt(this.value, 10));
         this.submitted = true;
       }
     }

@@ -4,21 +4,20 @@
       <div class="modal-wrapper">
         <div class="modal-container">
           <div class="modal-header">
-            Success / failure!
+            <h2 v-if="success">Success</h2>
+            <h2 v-else>Failure</h2>
           </div>
 
           <div class="modal-body">
-            <slot name="body">
+            <div>
               <p>Maximum offer was: {{ employerOffer }}</p>
               <p>Minimum expected salary was: {{ employeeExpectation }}</p>
-            </slot>
+            </div>
           </div>
 
-          <div class="modal-footer">
-            <button class="modal-default-button" @click="$emit('close')">
-              OK
-            </button>
-          </div>
+          <button @click="$emit('close')">
+            OK
+          </button>
         </div>
       </div>
     </div>
@@ -27,6 +26,8 @@
 
 <script>
 // TODONOW: refactor modal
+
+// TODONOW: add weather API integration
 export default {
   name: "ResultsModal",
   props: {
@@ -36,6 +37,10 @@ export default {
     },
     employeeExpectation: {
       type: Number,
+      required: true
+    },
+    success: {
+      type: Boolean,
       required: true
     }
   }
@@ -71,9 +76,9 @@ export default {
   font-family: Helvetica, Arial, sans-serif;
 }
 
-.modal-header h3 {
+.modal-header h2 {
   margin-top: 0;
-  color: #42b983;
+  color: #0d4acc;
 }
 
 .modal-body {
