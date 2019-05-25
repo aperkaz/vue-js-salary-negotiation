@@ -17,7 +17,7 @@
 <script>
 import Tabs from "./components/Tabs.vue";
 import ResultsModal from "./components/ResultsModal.vue";
-import { isExpectationMatch } from "./utils/calculations";
+import { doExpectationsMatch } from "./utils/calculations";
 import { events } from "./utils/events";
 import { EventBus } from "./utils/EventBus";
 
@@ -39,7 +39,7 @@ export default {
       return this.resultSubmitted() && !this.hasModalBeenShown;
     },
     isSuccess() {
-      return isExpectationMatch(this.employerOffer, this.employeeExpectation);
+      return doExpectationsMatch(this.employerOffer, this.employeeExpectation);
     }
   },
   methods: {

@@ -1,3 +1,3 @@
-export const isExpectationMatch = (employerOffer, employeeExpectation) => {
+export const doExpectationsMatch = (employerOffer, employeeExpectation) => {
   return employerOffer >= employeeExpectation;
 };
