@@ -12,6 +12,9 @@
             <div>
               <p>Maximum offer was: {{ employerOffer }}</p>
               <p>Minimum expected salary was: {{ employeeExpectation }}</p>
+              <br/>
+              <p>The temperature in London: {{temperatureLondon}}°C</p>
+               <br/>
             </div>
           </div>
 
@@ -25,9 +28,12 @@
 </template>
 
 <script>
+import axios from "axios";
 // TODONOW: refactor modal
 
-// TODONOW: add weather API integration
+// TODONOW: clean styling
+
+// TODONOW: extract key from API call. https://github.com/motdotla/dotenv#readme. Mention it on the Docs
 export default {
   name: "ResultsModal",
   props: {
@@ -43,6 +49,19 @@ export default {
       type: Boolean,
       required: true
     }
+  },
+  data() {
+    return {
+      temperatureLondon: null
+    };
+  },
+  mounted() {
+    axios
+      .get(
+        "https://api.openweathermap.org/data/2.5/weather?q=London&units=metric&APPID=d84eb0ab097e973587b1c4e200d525b5"
+      )
+      .then(res => (this.temperatureLondon = res.data.main.temp))
+      .catch(e => console.error(e));
   }
 };
 </script>
