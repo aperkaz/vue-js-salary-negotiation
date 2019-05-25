@@ -1,16 +1,27 @@
 <template>
   <div class="wrapper">
-    <p>{{ placeholder }} salary expectation Panel</p>
-    <input type="number" :placeholder="placeholder" v-model="value" />
+    <input
+      v-show="!submitted"
+      type="number"
+      :placeholder="placeholder"
+      v-model="value"
+    />
     <button v-show="!submitted" v-on:click.prevent="onSubmit">Submit</button>
+    <p v-show="submitted">{{ submittedMessage }}</p>
   </div>
 </template>
 
 <script>
+// TODONOW: rename props
+// TODONOW: delete up down from input
 export default {
   name: "SalaryExpectationPanel",
   props: {
     placeholder: {
+      type: String,
+      required: false
+    },
+    submittedMessage: {
       type: String,
       required: false
     }
@@ -40,7 +51,7 @@ export default {
   border: 2px black;
   border-style: solid;
   width: 60%;
-  padding: 15px 0 35px 0;
-  margin: 30px auto;
+  padding: 35px 0;
+  margin: 5px auto;
 }
 </style>

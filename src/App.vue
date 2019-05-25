@@ -3,20 +3,33 @@
     <h1>
       Vue.js salary negotatior
     </h1>
-    <div><span>Employer tab</span> / <span>Employee tab</span></div>
-    <SalaryExpectationPanel placeholder="Employer" />
+    <Tabs />
+    <ResultsModal
+      v-if="resultSubmitted"
+      employerOffer="100"
+      employeeExpectation="100"
+    />
   </div>
 </template>
 
 <script>
-import SalaryExpectationPanel from "./components/SalaryExpectationPanel.vue";
+import Tabs from "./components/Tabs.vue";
+import ResultsModal from "./components/ResultsModal.vue";
 
 export default {
   name: "app",
   components: {
-    SalaryExpectationPanel
+    Tabs,
+    ResultsModal
+  },
+  computed: {
+    resultSubmitted() {
+      return false;
+    }
   }
 };
+
+// TODONOW: clean up styling
 </script>
 
 <style>
